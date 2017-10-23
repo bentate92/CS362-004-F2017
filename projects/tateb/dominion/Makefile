@@ -59,18 +59,6 @@ runUT4: unittest4
 	./unittest4 >> unittestresults.out
 	gcov dominion.c -b >> unittestresults.out
 
-UTs: UT1 UT2 UT3 UT4
-
-runUTs: 
-	rm -f dominion.gcda
-	make runUT1 
-	rm -f dominion.gcda
-	make runUT2 
-	rm -f dominion.gcda
-	make runUT3 
-	rm -f dominion.gcda
-	make runUT4
-
 CT1: cardtest1.c dominion.o rngs.o
 	gcc -o cardtest1 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
 runCT1: cardtest1
@@ -97,7 +85,8 @@ runCT4: cardtest4
 
 tests: UT1 UT2 UT3 UT4 CT1 CT2 CT3 CT4
 
-runUTCT: 
+unittestresults.out: 
+	make tests
 	rm -f dominion.gcda
 	make runUT1 
 	rm -f dominion.gcda
@@ -114,6 +103,7 @@ runUTCT:
 	make runCT3 
 	rm -f dominion.gcda
 	make runCT4
+#End Assignment 3 tests
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe badTestDrawCard
