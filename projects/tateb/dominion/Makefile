@@ -83,10 +83,10 @@ runCT4: cardtest4
 	./cardtest4 >> unittestresults.out
 	gcov dominion.c -b >> unittestresults.out
 
-tests: UT1 UT2 UT3 UT4 CT1 CT2 CT3 CT4
+UTCTs: UT1 UT2 UT3 UT4 CT1 CT2 CT3 CT4
 
 unittestresults.out: 
-	make tests
+	make UTCTs
 	rm -f dominion.gcda
 	make runUT1 
 	rm -f dominion.gcda
@@ -105,8 +105,40 @@ unittestresults.out:
 	make runCT4
 #End Assignment 3 tests
 
+#Assignment 4 tests below
+RTC1: randomtestcard1.c dominion.o rngs.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+runRTC1: randomtestcard1
+	./randomtestcard1 >> randomtestcard1.out
+	gcov dominion.c -b >> randomtestcard1.out
+
+RTC2: randomtestcard2.c dominion.o rngs.o
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+runRTC2: randomtestcard2
+	./randomtestcard2 >> randomtestcard2.out
+	gcov dominion.c -b >> randomtestcard2.out
+
+RTAd: randomtestadventurer.c dominion.o rngs.o
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+runRTAd: randomtestadventurer
+	./randomtestadventurer >> randomtestadventurer.out
+	gcov dominion.c -b >> randomtestadventurer.out
+
+RTs: RTC1 RTC2 RTAd
+
+runRTs:
+	make RTs
+	rm -f dominion.gcda
+	make runRTC1
+	rm -f dominion.gcda
+	make runRTC2
+	rm -f dominion.gcda
+	make runRTAd
+#End Assignment 4 tests
+
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe badTestDrawCard
 	rm -f unittest1 unittest2 unittest3 unittest4
 	rm -f cardtest1 cardtest2 cardtest3 cardtest4
+	rm -f randomtestcard1 randomtestcard2 randomtestadventurer
 
