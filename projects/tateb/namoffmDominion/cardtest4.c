@@ -1,6 +1,6 @@
 /*************************************************************
- * File: cardtest1.c
- * Purpose: Unit test for the smithy dominion card
+ * File: cardtest4.c
+ * Purpose: Unit test for the great hall dominion card
  *************************************************************/
 
 #include "dominion.h"
@@ -22,10 +22,7 @@ void myAssert(int actual, int expected, char* message) {
 }
 
 int main() {
-	printf("\n----CARD TEST 1: Smithy----\n\n");
-
-	int handPos = 0;
-	int bonus = 0;
+	printf("\n----CARD TEST 4: Great Hall----\n\n");
 
 	int numPlayers = 2;
 	int kCards[10] = {smithy, adventurer, baron, feast, 
@@ -36,22 +33,13 @@ int main() {
 	struct gameState oldGS;
 
 	initializeGame(numPlayers, kCards, randomSeed, &newGS);
-
-	int i;
-	for (i = 0; i < 100; i++) {
-		newGS.deck[0][i] = 1;
-		newGS.deckCount[0]++;
-	}
-
 	memcpy(&oldGS, &newGS, sizeof(struct gameState));
 
-	printf("\nTEST: drawing 3 cards at a time\n");
-	while (newGS.deckCount[0] > 0) {
-		cardEffect(smithy, 0, 0, 0, &newGS, handPos, &bonus);
-		myAssert(newGS.handCount[0], oldGS.handCount[0] + 2, "3 cards drawn");
-		myAssert(newGS.playedCardCount, oldGS.playedCardCount + 1, "1 card played");
-		memcpy(&oldGS, &newGS, sizeof(struct gameState));
-	}
+	cardEffect(great_hall, 0, 0, 0, &newGS, 0, 0);
+
+	printf("\nTEST: 1 card drawn\n");
+	myAssert(newGS.handCount[0], oldGS.handCount[0], "+1 card, -1 card");
+	myAssert(newGS.numActions, oldGS.numActions + 1, "+1 actions");
 
 	if (pass == 1) {
 		printf("\n***ALL TESTS PASSED***\n\n");
@@ -61,4 +49,3 @@ int main() {
 
 	return 0;
 }
-

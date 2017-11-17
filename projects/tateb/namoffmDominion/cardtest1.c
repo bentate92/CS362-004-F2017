@@ -48,8 +48,10 @@ int main() {
 	printf("\nTEST: drawing 3 cards at a time\n");
 	while (newGS.deckCount[0] > 0) {
 		cardEffect(smithy, 0, 0, 0, &newGS, handPos, &bonus);
-		myAssert(newGS.handCount[0], oldGS.handCount[0] + 2, "3 cards drawn");
-		myAssert(newGS.playedCardCount, oldGS.playedCardCount + 1, "1 card played");
+		char handCountTest[128];
+		sprintf(handCountTest, "expected %d cards; got %d cards", oldGS.handCount[0] + 2, newGS.handCount[0]);
+		myAssert(newGS.handCount[0], oldGS.handCount[0] + 2, handCountTest);
+//		myAssert(newGS.discardCount[0], oldGS.discardCount[0] + 1, "1 card discarded");
 		memcpy(&oldGS, &newGS, sizeof(struct gameState));
 	}
 

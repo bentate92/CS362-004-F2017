@@ -1,0 +1,50 @@
+----BUG #1----
+Title: Village card adds one action instead of two
+
+ID: Village741
+
+Summary: This bug consistently causes the Village card to add only one action, when it should add two. The source of the bug seems to be line 741 of dominion.c.
+
+How to find it: It can be reliably found by checking the number of actions a given player has before and after any time they play the Village card.
+
+Code to reliably produce the bug: cardEffect(village, 0, 0, 0, &state, 0, 0)
+
+Software version: “Assignment 4 Finished” commit on 10/27/17.
+
+Estimated severity: Since this bug reliably occurs every time the Village card is played, thereby totally breaking that card, it should be considered very severe.
+
+Estimated priority: This bug won’t interfere with testing of anything that doesn’t involve the Village card, so needs only to be fixed before such testing occurs, or before the final product is shipped.
+
+----BUG #2----
+Title: Adventurer card adds wrong number of treasure
+
+ID: Adventurer666
+
+Summary: This bug causes the Adventurer card to add the wrong number of treasure to the player’s hand by failing to count how many have been drawn correctly. The source of the bug seems to be on line 666 of dominion.c.
+
+How to find it: The bug can be found fairly reliably by checking that the 2 treasure are added to the player’s hand after playing the adventurer card. Although the bug occurred in every one of 200 random tests, its results are somewhat inconsistent, so it is possible that it could go unnoticed with the right deck configuration.
+
+Code to produce the bug: cardEffect(adventurer, 0, 0, 0, &state, 0, 0)
+
+Software version: “Assignment 4 Finished” commit on 10/27/17.
+
+Estimated severity: Since this bug occurs at least nearly every time the Adventurer card is played, it should be considered very severe.
+
+Estimated priority: This bug won’t interfere with testing of anything that doesn’t involve the Adventurer card, so needs only to be fixed before such testing occurs, or before the final product is shipped.
+
+----BUG #3----
+Title: Smithy card draws four cards instead of three
+
+ID: Smithy695
+
+Summary: This bug consistently causes the Smithy card to draw the wrong number of cards (4 instead of 3). The source of the bug seems to be on line 695 of dominion.c.
+
+How to find it: Check that a player has 2 more cards in their hand after playing the Smithy card (+3, -1), and you will consistently find that they have an extra
+
+Code to reliably produce the bug: cardEffect(smithy, 0, 0, 0, &state, 0, 0)
+
+Software version: “Assignment 4 Finished” commit on 10/27/17.
+
+Estimated severity: Since this bug reliably occurs every time the Smithy card is played, thereby totally breaking that card, it should be considered very severe.
+
+Estimated priority: This bug won’t interfere with testing of anything that doesn’t involve the Smithy card, so needs only to be fixed before such testing occurs, or before the final product is shipped.
